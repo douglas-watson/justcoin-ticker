@@ -25,6 +25,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=[
     	'flask',
+        'pymongo',
         'requests',
     ],
     test_suite='nose.collector',
