@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Automatically rebuild documentation on file save
+#
+########################################
+
+BASEDIR=$(dirname $0)
+ROOTDIR=$BASEDIR/../
+
+watchmedo shell-command \
+              --patterns="$ROOTDIR/*.rst" \
+              --ignore-pattern='$ROOTDIR/_build/*' \
+              --recursive \
+              --command='make html'
