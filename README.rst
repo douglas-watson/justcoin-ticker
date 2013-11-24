@@ -13,12 +13,14 @@ Introduction
 This is mostly an excuse to make a web service client, use a noSQL database, and
 potentially play with some new visualization tools. I admit some choices do not
 make sense for a stock ticker --- a noSQL database makes no sense with  highly-
-structued, purely numerical data. I'm doing it to learn the technologies.
+structued, purely numerical data. I'm doing it to play with those techniques, and maybe see how well they work for this.
 
-The motivation for a Justcoin stock ticker is twofold:
+The motivations for a Justcoin stock ticker are simple:
 
 1. You must login to consult the rates
 2. Justcoin provides a simple API
+
+The lame name is to avoid any name conflicts with ticker.
 
 Requirements
 ------------

@@ -27,6 +27,7 @@ setup(
     	'flask',
         'pymongo',
         'requests',
+        'kronos',
     ],
     test_suite='nose.collector',
     tests_require=['nose'],
