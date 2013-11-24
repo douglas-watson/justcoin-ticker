@@ -50,6 +50,7 @@ It should install all dependencies.
    :maxdepth: 2
 
    design
+   data_structures
    api
 
 
