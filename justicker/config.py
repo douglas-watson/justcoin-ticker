@@ -16,5 +16,5 @@ DB_HOST = 'localhost'
 #: MongoDB port
 DB_PORT = 27017
 #: database to use
-DATABASE = 'justicker-testing'
+DATABASE = 'justicker'
 

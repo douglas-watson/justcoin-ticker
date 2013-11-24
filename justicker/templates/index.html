@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Justcoin ticker</title>
+<link rel="stylesheet" type="text/css" 
+    href="{{ url_for('static', filename='styling.css') }}"></script>
+    
+<!-- Libraries -->
+<script type="text/javascript" 
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" 
+    src="{{ url_for('static', filename='highstock.js') }}"></script>
+<script type="text/javascript" 
+    src="{{ url_for('static', filename='modules/exporting.js') }}"></script>
+
+<!-- Custom code -->
+<script type="text/javascript" 
+    src="{{ url_for('static', filename='main.js') }}"></script>
+
+
+</head>
+<body>
+
+    <div id="main>"
+        <div id="header">
+            <h1 id="heading">Justcoin Stock Ticker</h1>
+        </div>
+
+        {% block main %}
+
+        <div id="content">
+            <div id="container"></div>
+            <p>Main stuff goes here.</p>
+        </div>
+
+        {% endblock %}
+
+        <div id="copyright">
+            &copy; 2013, Douglas C. Watson. <a href='https://github.com/douglas-watson/justcoin-ticker'>Source</a>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

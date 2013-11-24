@@ -12,12 +12,26 @@ Django-like MVT framework.
 
 '''
 
-from flask import Flask
+from flask import render_template, jsonify, Response
 
-from __init__ import app
+from justicker import app
+from justicker import archivist
 
-app.route('/')
-app.route('/index')
+@app.route('/')
+@app.route('/index')
 def index():
     ''' Feed landing page ''' 
-    pass
+    return render_template('index.html')
+
+@app.route('/api/markets/<id>')
+def market(id):
+    ''' Return JSON data for market ``id`` '''
+
+    # Get data from archivist
+    data = archivist.present_markets(id)
+
+    # Prepare response
+    resp = jsonify(data)
+    resp.status_code = 200
+
+    return resp

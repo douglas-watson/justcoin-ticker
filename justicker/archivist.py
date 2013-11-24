@@ -82,6 +82,7 @@ def present_markets(id='BTCEUR', db=DB):
     # Need to cast to list to iterate more than once.
     entries = list(coll.find({'id': id}).sort('date'))
 
+    # TODO translate to something Highcharts can use.
     data = {
         'dates' :   [ e['timestamp']    for e in entries ],
         'last' :    [ float(e['last'])  for e in entries ],
