@@ -31,7 +31,7 @@ def market(id):
     data = archivist.present_markets(id)
 
     # Prepare response
-    resp = jsonify(data)
+    resp = jsonify({'data': data})
     resp.status_code = 200
 
     return resp

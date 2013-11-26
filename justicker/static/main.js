@@ -27,7 +27,7 @@
             series : [{
                 type : 'candlestick',
                 name : 'BTCEUR',
-                data : data,
+                data : data['data'],
                 dataGrouping : {
                     units : [
                         ['week', // unit name

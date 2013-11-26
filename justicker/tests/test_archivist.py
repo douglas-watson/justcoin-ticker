@@ -16,6 +16,7 @@ The tests require a local running MongoDB
 import os
 import sys
 import json
+import numpy as np
 from pymongo import MongoClient
 
 # Add project root directory to path
@@ -67,12 +68,13 @@ class TestArchivist(object):
         assert new_num_entries == num_entries + 5
 
     def test_present_markets(self):
-        ''' Check present_markets extracts data correctly '''
+        ''' Check present_markets extracts data in highcharts-compat format. '''
 
         data = present_markets(id='BTCEUR', db=self.db)
 
-        assert data['high'] == [675.000, 680.000]
-        assert data['last'] == [595.230, 679.000]
+        print data[0][1:]
+        assert len(data) == 2
+        assert np.all(data[0][1:] == np.array([595.23, 595.23, 583.001, 675.0]))
 
 
 

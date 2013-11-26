@@ -12,6 +12,7 @@ Archivist manages the fetching of remote data, as interacting with the database.
 '''
 
 import requests
+import numpy as np
 from datetime import datetime
 from pymongo import MongoClient
 
@@ -25,6 +26,16 @@ MARKETS_URL = 'https://api.justcoin.com/v1/markets'
 #: database client
 client = MongoClient(app.config['DB_HOST'])
 DB = client[app.config['DATABASE']]
+
+def time_to_milliseconds(time):
+    ''' Return time in milliseconds, for JSON '''
+
+    epoch = datetime.utcfromtimestamp(0)
+    delta = time - epoch
+    unix_time = delta.total_seconds()
+
+    return int(unix_time * 1000)
+    
 
 def get_markets():
     ''' Returns json data for markets as unicode string '''
@@ -83,18 +94,23 @@ def present_markets(id='BTCEUR', db=DB):
     entries = list(coll.find({'id': id}).sort('date'))
 
     # TODO translate to something Highcharts can use.
-    data = {
-        'dates' :   [ e['timestamp']    for e in entries ],
-        'last' :    [ float(e['last'])  for e in entries ],
-        'high' :    [ float(e['high'])   for e in entries ],
-        'low' :     [ float(e['low'])    for e in entries ],
-        'bid' :     [ float(e['bid'])    for e in entries ],
-        'ask' :     [ float(e['ask'])    for e in entries ],
-        'volume' :  [ float(e['volume']) for e in entries ],
-        'scale' :   [ int(e['scale'])  for e in entries ],
-    }
 
-    return data
+    data = np.array([[
+        e['timestamp'],
+        float(e['last']), 
+        float(e['low']), 
+        float(e['high'])]
+            for e in entries ])
+
+    # Make 'open' col and insert as second column
+    open_col = np.append(data[0, 1], data[:-1,1])
+    data = np.insert(data, 1, open_col, axis=1)
+
+    # Convert timestamps to milliseconds for highcharts:
+    dates = map(time_to_milliseconds, data[:,0])
+    data[:,0] = dates
+
+    return data.tolist()
 
 
 if __name__ == '__main__':

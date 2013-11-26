@@ -23,8 +23,8 @@ body {
 }
 
 #header {
-    height: 3em;
-    padding: 30px;
+    height: 4em;
+    padding: 1em;
     background-color: #1F1F1F;
     -moz-border-radius-topleft: 7px;
     -moz-border-radius-topright: 7px;
@@ -36,7 +36,7 @@ body {
 
 #content {
     height: 100%;
-    margin: 0px 1em;
+    margin: 1em 1em;
     text-align: left;
 }
 
@@ -46,9 +46,10 @@ body {
 
 #copyright {
     margin: auto;
+    padding: 0.5em;
     text-align: center;
     width: 100%;
-    color: #999999;
+    color: black;
 }
 
 #copyright a {
@@ -58,10 +59,10 @@ body {
 h1 {
     display: inline;
 	text-align: center;
-    color: white;
+    color: black;
     height: 100%;
-    margin: auto;
-    padding-top: 2em;
+    margin: 2em auto;
+    padding: 2em;
 }
 
 /* -----------------------
