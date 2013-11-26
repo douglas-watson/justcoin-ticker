@@ -13,4 +13,5 @@ Start serving the web service
 
 from justicker import app
 
-app.run('localhost', debug=True)
+if __name__ == '__main__':
+    app.run('localhost', debug=True)

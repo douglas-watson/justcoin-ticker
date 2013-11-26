@@ -33,13 +33,4 @@ framework) provides the web frontend.
 Installation
 ------------
 
-Install Python and MongoDB. On ubuntu::
-
-    sudo apt-get install python-setuptools mongodb
-
-Run the setup script::
-
-    python setup.py install
-
-It should install all dependencies.
-
+Deploy the usual way for a Flask app.
