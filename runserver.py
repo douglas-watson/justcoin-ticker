@@ -11,7 +11,11 @@ Start serving the web service
 
 '''
 
-from justicker import app
+from justicker import app 
 
 if __name__ == '__main__':
-    app.run('localhost', debug=True)
+    app.scheduler.start()
+    app.run('0.0.0.0', port=8899, debug=True)
+    app.scheduler.stop()
+
+

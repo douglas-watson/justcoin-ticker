@@ -15,7 +15,7 @@ This "main" script manages configuration, the web server, and scheduled tasks.
 '''
 
 from flask import Flask
-# from kronos import ThreadedScheduler
+from kronos import ThreadedScheduler, method
 
 app = Flask(__name__)
 app.config.from_object('justicker.config')
@@ -26,20 +26,27 @@ from justicker import presenter     # the 'views'
 __all__ = ['app']
 
 ############################################
-# Setup and config
+# Setup repeated tasks
 ############################################
 
+def record_markets():
+    ''' Get and store market data. To be scheduled by kronos. '''
+    data = archivist.get_markets()
+    archivist.archive_data(data)
+
 #: Manages repeated tasks, such as fetching new data
-# app.scheduler = ThreadedScheduler()
+app.scheduler = ThreadedScheduler()
 
 # Fetch stock data every 1 hour
-# app.scheduler.add_interval_task(archivist.get_markets, 'get_markets', ...)
+app.scheduler.add_interval_task(action=record_markets, 
+    taskname='get_markets', initialdelay=0, interval=60, 
+    processmethod=method.threaded, args=None, kw=None)
 
 ############################################
 # Main
 ############################################
 
 if __name__ == '__main__':
-    # app.scheduler.start()
+    app.scheduler.start()
     app.run('localhost', debug=True)
-    # app.scheduler.stop()
+    app.scheduler.stop()
